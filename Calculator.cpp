@@ -1,3 +1,7 @@
+// Calculator.cpp made with the help of ChatGPT
+// A simple command-line calculator that supports basic arithmetic operations,
+// maintains a history of calculations, and allows users to view past results.
+
 #include <cmath>
 #include <iostream>
 #include <limits>
