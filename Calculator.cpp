@@ -20,10 +20,10 @@ double promptForNumber(const std::string& label) {
     }
 }
 
-// Ask the user which arithmetic operation to perform; includes quit option.
+// Ask the user which arithmetic operation to perform; includes quit and reset options.
 char promptForOperation() {
     while (true) {
-        std::cout << "Choose operation (+, -, *, /, %, q to quit): ";
+        std::cout << "Choose operation (+, -, *, /, %, n for new, q to quit): ";
         char op{};
         if (std::cin >> op) {
             switch (op) {
@@ -32,6 +32,8 @@ char promptForOperation() {
                 case '*':  // Multiplication
                 case '/':  // Division
                 case '%':  // Modulo (floating-point remainder)
+                case 'n':  // Start a new calculation (lowercase)
+                case 'N':  // Start a new calculation (uppercase)
                 case 'q':  // Quit (lowercase)
                 case 'Q':  // Quit (uppercase)
                     return op;
@@ -42,7 +44,7 @@ char promptForOperation() {
 
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Unsupported operation. Please choose one of +, -, *, /, %, or q.\n";
+        std::cout << "Unsupported operation. Please choose one of +, -, *, /, %, n, or q.\n";
     }
 }
 
@@ -85,6 +87,11 @@ int main() {
         char operation = promptForOperation();
         if (operation == 'q' || operation == 'Q') {
             break;
+        }
+        if (operation == 'n' || operation == 'N') {
+            result = promptForNumber("the first number");
+            std::cout << "Current result: " << result << "\n";
+            continue;
         }
 
         // Gather the next operand and immediately compute the new result.
